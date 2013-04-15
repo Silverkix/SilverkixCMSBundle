@@ -1,0 +1,3 @@
+site_index:
+    pattern:  /
+    defaults: { _controller: SilverkixCMSBundle:Default:index }

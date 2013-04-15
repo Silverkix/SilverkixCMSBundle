@@ -1,0 +1,3 @@
+admin_index:
+    pattern: /
+    defaults: { _controller: SilverkixCMSBundle:Admin:index }

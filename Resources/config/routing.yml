@@ -1,3 +1,7 @@
-home:
-    pattern:  /
-    defaults: { _controller: SilverkixCMSBundle:Default:index }
+site:
+    resource: "@SilverkixCMSBundle/Resources/config/routing_site.yml"
+    prefix:   /
+
+admin:
+    resource: "@SilverkixCMSBundle/Resources/config/routing_admin.yml"
+    prefix:   /admin
