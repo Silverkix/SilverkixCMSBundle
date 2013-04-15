@@ -1,18 +1,1 @@
-admin:
-    resource: "@SilverkixCMSBundle/Resources/config/routing_admin.yml"
-    prefix:   /admin
 
-admin_login:
-    pattern:   /login
-    defaults:  { _controller: SilverkixCMSBundle:Admin:login }
-
-admin_login_check:
-    pattern:   /login_check
-
-admin_logout:
-    path:   /logout
-
-# Don't include the site's routing untill all functional routing has been matched
-site:
-    resource: "@SilverkixCMSBundle/Resources/config/routing_site.yml"
-    prefix:   /
