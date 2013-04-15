@@ -46,7 +46,12 @@ This cms includes the following features:
 ### 3) Update database
 Run `php app/console doctrine:schema:update` to update the database
 
-### 4) Extend your bundle
+### 4) Load fixtures
+add the fixtures bundle to your kernel:
+
+`new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),`
+
+### 5) Extend your bundle
 In order to overwrite the fontend template you need to extend out bundle so you can overwrite any necessary stuffz.
 
     <?php
