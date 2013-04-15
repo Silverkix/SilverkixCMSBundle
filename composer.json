@@ -1,13 +1,16 @@
 {
     "name": "silverkix/cms-bundle",
+    "versio": "0.1",
     "description": "Simple cms bundle for Symfony 2.2",
     "keywords": [],
     "type": "symfony-bundle",
-    "license": "Apache",
+    "license": "CC-BY-SA-3.0",
     "authors": [
         {
             "name": "Christian Vermeulen",
-            "email": "info@christianvermeulen.net"
+            "email": "info@christianvermeulen.net",
+            "homepage": "http://www.christianvermeulen.net",
+            "role": "Lead Developer"
         }
     ],
     "require": {
