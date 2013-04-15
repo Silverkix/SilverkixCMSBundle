@@ -81,7 +81,7 @@ class Page
     public function setTitle($title)
     {
         $this->title = $title;
-        $this->slug = cleanName($title);
+        $this->slug = $this->CleanName($title);
 
         return $this;
     }
@@ -176,29 +176,6 @@ class Page
     }
 
     /**
-     * Set parent
-     *
-     * @param integer $parent
-     * @return Page
-     */
-    public function setParent($parent)
-    {
-        $this->parent = $parent;
-
-        return $this;
-    }
-
-    /**
-     * Get parent
-     *
-     * @return integer
-     */
-    public function getParent()
-    {
-        return $this->parent;
-    }
-
-    /**
      * Set online
      *
      * @param boolean $online
@@ -246,7 +223,7 @@ class Page
     public function setSlug($slug)
     {
         $this->slug = $slug;
-    
+
         return $this;
     }
 
@@ -259,7 +236,7 @@ class Page
     public function addChildren(\Silverkix\CMSBundle\Entity\Page $children)
     {
         $this->children[] = $children;
-    
+
         return $this;
     }
 
@@ -276,10 +253,33 @@ class Page
     /**
      * Get children
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getChildren()
     {
         return $this->children;
+    }
+
+    /**
+     * Set parent
+     *
+     * @param \Silverkix\CMSBundle\Entity\Page $parent
+     * @return Page
+     */
+    public function setParent(\Silverkix\CMSBundle\Entity\Page $parent = null)
+    {
+        $this->parent = $parent;
+
+        return $this;
+    }
+
+    /**
+     * Get parent
+     *
+     * @return \Silverkix\CMSBundle\Entity\Page
+     */
+    public function getParent()
+    {
+        return $this->parent;
     }
 }
