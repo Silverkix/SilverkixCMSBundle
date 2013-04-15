@@ -1,0 +1,20 @@
+{
+    "name": "silverkix/cms-bundle",
+    "description": "Simple cms bundle for Symfony 2.2",
+    "keywords": [],
+    "type": "symfony-bundle",
+    "license": "Apache",
+    "authors": [
+        {
+            "name": "Christian Vermeulen",
+            "email": "info@christianvermeulen.net"
+        }
+    ],
+    "require": {
+        "symfony/framework-bundle": "2.2.*"
+    },
+    "autoload": {
+        "psr-0": { "Silverkix\\CMSBundle": "" }
+    },
+    "target-dir": "Silverkix/CMSBundle"
+}
