@@ -8,6 +8,6 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
-        return $this->render('SilverkixCMSBundle:Default:index.html.twig');
+        return $this->render('SilverkixCMSBundle:Site:index.html.twig');
     }
 }
