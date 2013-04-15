@@ -14,7 +14,8 @@
         }
     ],
     "require": {
-        "symfony/framework-bundle": "2.2.*"
+        "symfony/framework-bundle": "2.2.*",
+        "doctrine/doctrine-fixtures-bundle": "dev-master"
     },
     "autoload": {
         "psr-0": { "Silverkix\\CMSBundle": "" }
