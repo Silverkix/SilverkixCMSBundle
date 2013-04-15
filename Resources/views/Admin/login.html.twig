@@ -1,18 +1,22 @@
-{% if error %}
-    <div>{{ error.message }}</div>
-{% endif %}
-
-<form action="{{ path('admin_login_check') }}" method="post">
-    <label for="username">Username:</label>
-    <input type="text" id="username" name="_username" value="{{ last_username }}" />
-
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="_password" />
-
-    {#
-        If you want to control the URL the user is redirected to on success (more details below)
-        <input type="hidden" name="_target_path" value="/account" />
-    #}
-
-    <button type="submit">login</button>
-</form>
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <title>Slick Login</title>
+    <meta name="description" content="slick Login">
+    <meta name="author" content="Webdesigntuts+">
+    <link rel="stylesheet" type="text/css" href="/bundles/silverkixcms/css/login.css" />
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="http://www.modernizr.com/downloads/modernizr-latest.js"></script>
+    <script type="text/javascript" src="/bundles/silverkixcms/js/placeholder.js"></script>
+</head>
+    <body>
+    {% if error %}
+        <div class="error">{{ error.message }}</div>
+    {% endif %}
+    <form id="slick-login" action="{{ path('admin_login_check') }}" method="post">
+        <label for="username">username</label><input type="text" name="_username" class="placeholder" placeholder="Username">
+        <label for="password">password</label><input type="password" name="_password" class="placeholder" placeholder="Password">
+        <input type="submit" value="Log In">
+    </form>
+</body>
+</html>
