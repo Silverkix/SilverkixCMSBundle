@@ -1,0 +1,7 @@
+parameters:
+#    silverkix_cms.example.class: Silverkix\CMSBundle\Example
+
+services:
+#    silverkix_cms.example:
+#        class: %silverkix_cms.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
