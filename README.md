@@ -45,3 +45,21 @@ This cms includes the following features:
 
 ### 3) Update database
 Run `php app/console doctrine:schema:update` to update the database
+
+### 4) Extend your bundle
+In order to overwrite the fontend template you need to extend out bundle so you can overwrite any necessary stuffz.
+
+    <?php
+    // src/Acme/DemoBundle/AcmeDemoBundle.php
+
+    namespace Acme\DemoBundle;
+
+    use Symfony\Component\HttpKernel\Bundle\Bundle;
+
+    class AcmeDemoBundle extends Bundle
+    {
+        public function getParent()
+        {
+            return 'SilverkixCMSBundle';
+        }
+    }
