@@ -42,3 +42,6 @@ This cms includes the following features:
 
         access_control:
             - { path: ^/admin, roles: ROLE_ADMIN }
+
+### 3) Update database
+Run `php app/console doctrine:schema:update` to update the database
