@@ -7,11 +7,28 @@ use Symfony\Component\Security\Core\SecurityContext;
 
 class AdminController extends Controller
 {
+    /* Render the index of the admin panel */
     public function indexAction()
     {
         return $this->render('SilverkixCMSBundle:Admin:index.html.twig');
     }
 
+    /************************************************
+    *  User Management
+    *************************************************/
+
+    /* Render the user management index */
+    public function userIndexAction()
+    {
+        return $this->render('SilverkixCMSBundle:Admin:Users/index.html.twig');
+    }
+
+
+    /************************************************
+    *  Utilities
+    *************************************************/
+
+    /* Perform the login for the admin panel */
     public function loginAction()
     {
         $request = $this->getRequest();

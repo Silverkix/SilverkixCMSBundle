@@ -1,0 +1,30 @@
+admin_user:
+    pattern:  /
+    defaults: {_controller: SilverkixCMSBundle:AdminUser:index}
+
+admin_user_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "SilverkixCMSBundle:AdminUser:show" }
+
+admin_user_new:
+    pattern:  /new
+    defaults: { _controller: "SilverkixCMSBundle:AdminUser:new" }
+
+admin_user_create:
+    pattern:  /create
+    defaults: { _controller: "SilverkixCMSBundle:AdminUser:create" }
+    requirements: { _method: post }
+
+admin_user_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "SilverkixCMSBundle:AdminUser:edit" }
+
+admin_user_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "SilverkixCMSBundle:AdminUser:update" }
+    requirements: { _method: post|put }
+
+admin_user_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "SilverkixCMSBundle:AdminUser:delete" }
+    requirements: { _method: post|delete }
