@@ -1,0 +1,18 @@
+Silverkix\CMSBundle\Entity\User:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+            fields: username
+            message: This username is already used
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+            fields: email
+            message: This email is already used
+    properties:
+        username:
+            - NotBlank: ~
+        email:
+            - NotBlank: ~
+        password:
+            - NotBlank: ~
+            - Length:
+                min: 8
+                minMessage: A password needs to be at least 8 characters

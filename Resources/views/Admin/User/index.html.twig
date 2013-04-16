@@ -1,45 +1,29 @@
 {% extends 'SilverkixCMSBundle:Admin:index.html.twig' %}
 
 {% block content -%}
-    <h3>User list</h3>
-
+    <h2><a href="#">Manage Users</a></h2>
+    <h3>Overview</h3>
+    <p>The current users affiliated with this website are listed over here. You can edit, delete of create new users.</p>
+    <p class="right"><a href="{{ path('admin_user_new') }}">Create a new entry</a></p>
     <table class="records_list">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Username</th>
                 <th>Email</th>
-                <th>Isactive</th>
-                <th>Actions</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
         {% for entity in entities %}
             <tr>
-                <td><a href="{{ path('admin_user_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
                 <td>{{ entity.username }}</td>
                 <td>{{ entity.email }}</td>
-                <td>{{ entity.isActive }}</td>
-                <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('admin_user_show', { 'id': entity.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('admin_user_edit', { 'id': entity.id }) }}">edit</a>
-                    </li>
-                </ul>
+                <td class="action">
+                        <a href="{{ path('admin_user_edit', { 'id': entity.id }) }}" class="edit">edit</a>
+                        <a href="{{ path('admin_user_delete', { 'id': entity.id }) }}" class="delete">delete</a>
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-
-        <ul>
-        <li>
-            <a href="{{ path('admin_user_new') }}">
-                Create a new entry
-            </a>
-        </li>
-    </ul>
     {% endblock %}

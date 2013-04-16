@@ -46,19 +46,20 @@ class AdminUserController extends Controller
 
         $form = $this->createForm(new UserType(), $entity);
         $form->bind($request);
+        $entity->setPassword($password);
 
         if ($form->isValid()) {
+
             $em = $this->getDoctrine()->getManager();
-            $entity->setPassword($password);
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('admin_user_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('admin_user'));
         }
 
         return $this->render('SilverkixCMSBundle:Admin:User/new.html.twig', array(
             'entity' => $entity,
-            'form'   => $form->createView(),
+            'form'   => $form->createView()
         ));
     }
 
@@ -75,27 +76,6 @@ class AdminUserController extends Controller
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
-    }
-
-    /**
-     * Finds and displays a User entity.
-     *
-     */
-    public function showAction($id)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $entity = $em->getRepository('SilverkixCMSBundle:User')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find User entity.');
-        }
-
-        $deleteForm = $this->createDeleteForm($id);
-
-        return $this->render('SilverkixCMSBundle:Admin:User/show.html.twig', array(
-            'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),        ));
     }
 
     /**
@@ -152,7 +132,7 @@ class AdminUserController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('admin_user_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('admin_user'));
         }
 
         return $this->render('SilverkixCMSBundle:Admin:User/edit.html.twig', array(
@@ -166,22 +146,17 @@ class AdminUserController extends Controller
      * Deletes a User entity.
      *
      */
-    public function deleteAction(Request $request, $id)
+    public function deleteAction($id)
     {
-        $form = $this->createDeleteForm($id);
-        $form->bind($request);
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('SilverkixCMSBundle:User')->find($id);
 
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('SilverkixCMSBundle:User')->find($id);
-
-            if (!$entity) {
-                throw $this->createNotFoundException('Unable to find User entity.');
-            }
-
-            $em->remove($entity);
-            $em->flush();
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find User entity.');
         }
+
+        $em->remove($entity);
+        $em->flush();
 
         return $this->redirect($this->generateUrl('admin_user'));
     }
