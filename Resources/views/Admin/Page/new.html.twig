@@ -1,0 +1,52 @@
+{% extends 'SilverkixCMSBundle:Admin:index.html.twig' %}
+
+{% block content -%}
+    <h2><a href="{{path('admin_page')}}">Page Management</a> &raquo; <a href="#" class="active">Add Page</a></h2>
+    <h3>Create a new page</h3>
+
+    <form action="{{ path('admin_page_create') }}" method="post" {{ form_enctype(form) }}>
+        <div class="error">
+            {{ form_errors(form) }}
+        </div>
+        <table cellpadding="0" cellspacing="0">
+            <tr>
+                <td>{{ form_label(form.title) }}</td>
+                <td>{{ form_widget(form.title) }}</td>
+                <td>{{ form_errors(form.title) }}</td>
+            </tr>
+            <tr>
+                <td>{{ form_label(form.keywords) }}</td>
+                <td>{{ form_widget(form.keywords) }}</td>
+                <td>{{ form_errors(form.keywords) }}</td>
+            </tr>
+            <tr>
+                <td>{{ form_label(form.description) }}</td>
+                <td>{{ form_widget(form.description) }}</td>
+                <td>{{ form_errors(form.description) }}</td>
+            </tr>
+            <tr>
+                <td colspan="3">{{ form_widget(form.content) }}</td>
+                <script>
+                    CKEDITOR.replace( 'silverkix_cmsbundle_pagetype[content]');
+                </script>
+            </tr>
+            <tr>
+                <td>{{ form_label(form.parent) }}</td>
+                <td>{{ form_widget(form.parent) }}</td>
+                <td>{{ form_errors(form.parent) }}</td>
+            </tr>
+            <tr>
+                <td>{{ form_label(form.online) }}</td>
+                <td>{{ form_widget(form.online) }}</td>
+                <td>{{ form_errors(form.online) }}</td>
+            </tr>
+            <tr>
+                <td colspan="3"><input type="submit" value="Save"/></td>
+            </tr>
+        </table>
+        {{ form_rest(form) }}
+    </form>
+{% endblock %}
+{% block scripts %}
+<script src="{{ asset('/bundles/silverkixcms/ckeditor/ckeditor.js') }}"></script>
+{% endblock %}

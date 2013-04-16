@@ -6,13 +6,19 @@
 <title>Silverkix CMS</title>
 
 <!-- CSS -->
+<link rel="stylesheet" type="text/css" media="screen" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/themes/smoothness/jquery-ui.css" />
 <link href="{{asset(resources)}}css/transdmin.css" rel="stylesheet" type="text/css" media="screen" />
 <!--[if IE 6]><link rel="stylesheet" type="text/css" media="screen" href="style/css/ie6.css" /><![endif]-->
 <!--[if IE 7]><link rel="stylesheet" type="text/css" media="screen" href="style/css/ie7.css" /><![endif]-->
 
 <!-- JavaScripts-->
-<script type="text/javascript" src="{{asset(resources)}}js/jquery.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js" ></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.min.js"></script>
 <script type="text/javascript" src="{{asset(resources)}}jNice.js"></script>
+
+<!-- Custom scripts and styles -->
+{% block scripts %}
+{% endblock %}
 </head>
 
 <body>

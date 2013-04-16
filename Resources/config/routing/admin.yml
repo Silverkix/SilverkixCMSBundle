@@ -2,6 +2,10 @@ admin_user:
     resource: "@SilverkixCMSBundle/Resources/config/routing/admin/user.yml"
     prefix: /user
 
+admin_page:
+    resource: "@SilverkixCMSBundle/Resources/config/routing/admin/page.yml"
+    prefix: /page
+
 admin_index:
     pattern: /
     defaults: { _controller: SilverkixCMSBundle:Admin:index }

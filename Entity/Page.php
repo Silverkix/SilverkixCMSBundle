@@ -282,4 +282,9 @@ class Page
     {
         return $this->parent;
     }
+
+    public function __toString()
+    {
+        return $this->getTitle();
+    }
 }

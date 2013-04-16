@@ -33,4 +33,7 @@ CKEDITOR.editorConfig = function( config ) {
 
 	// Make dialogs simpler.
 	config.removeDialogTabs = 'image:advanced;link:advanced';
+
+	// Set elFinder as filebrowser
+	config.filebrowserBrowseUrl = '/bundles/silverkixcms/elFinder/elfinder.html';
 };

@@ -1,0 +1,54 @@
+{% extends 'SilverkixCMSBundle:Admin:index.html.twig' %}
+
+{% block content -%}
+    <h2><a href="{{path('admin_page')}}">Page Management</a> &raquo; <a href="#" class="active">Edit Page</a></h2>
+    <h3>Edit {{entity.title}}</h3>
+
+    <form action="{{ path('admin_page_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+        <input type="hidden" name="_method" value="PUT" />
+        <div class="error">
+            {{ form_errors(edit_form) }}
+        </div>
+        <table cellpadding="0" cellspacing="0">
+            <tr>
+                <td>{{ form_label(edit_form.title) }}</td>
+                <td>{{ form_widget(edit_form.title) }}</td>
+                <td>{{ form_errors(edit_form.title) }}</td>
+            </tr>
+            <tr>
+                <td>{{ form_label(edit_form.keywords) }}</td>
+                <td>{{ form_widget(edit_form.keywords) }}</td>
+                <td>{{ form_errors(edit_form.keywords) }}</td>
+            </tr>
+            <tr>
+                <td>{{ form_label(edit_form.description) }}</td>
+                <td>{{ form_widget(edit_form.description) }}</td>
+                <td>{{ form_errors(edit_form.description) }}</td>
+            </tr>
+            <tr>
+                <td colspan="3">{{ form_widget(edit_form.content) }}</td>
+                <script>
+                    CKEDITOR.replace( 'silverkix_cmsbundle_pagetype[content]');
+                </script>
+            </tr>
+            <tr>
+                <td>{{ form_label(edit_form.parent) }}</td>
+                <td>{{ form_widget(edit_form.parent) }}</td>
+                <td>{{ form_errors(edit_form.parent) }}</td>
+            </tr>
+            <tr>
+                <td>{{ form_label(edit_form.online) }}</td>
+                <td>{{ form_widget(edit_form.online) }}</td>
+                <td>{{ form_errors(edit_form.online) }}</td>
+            </tr>
+            <tr>
+                <td colspan="3"><input type="submit" value="Save"/></td>
+            </tr>
+        </table>
+        {{ form_rest(edit_form) }}
+    </form>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ asset('/bundles/silverkixcms/ckeditor/ckeditor.js') }}"></script>
+{% endblock %}
