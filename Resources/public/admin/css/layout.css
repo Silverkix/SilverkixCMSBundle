@@ -20,6 +20,9 @@ body {
 	text-align: right;
 }
 
+.success{ color: #009900;}
+.error { color:#990000;}
+
 /* Logo  ---------------------------------------- */
 
 h1 {
@@ -170,10 +173,16 @@ p {
 	width: 700px;
 }
 
+#main table table {
+	width: 660px;
+	border-top:none;
+}
+
 #main table tr th {
 	padding: 10px;
 }
 
+#main table tr.children td td,
 #main table tr td {
 	background: #f6f6f6;
 	padding: 10px;
@@ -182,13 +191,19 @@ p {
 	border-bottom: 1px solid #ddd;
 }
 
+#main table tr.children td {
+	padding: 0 0 0 40px;
+	background: #fff;
+	border-bottom: none;
+}
+
 #main table tr.odd td {
 	background: #fbfbfb;
 }
 
 #main table tr:hover td { background: #fdfcf6; }
 
-#main table tr td:last-child
+#main table tr td.error
 {
 	color:#a02b2b;
 	font-weight: bold;

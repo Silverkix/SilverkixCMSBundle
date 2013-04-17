@@ -21,11 +21,44 @@
                 <td>{{ entity.title }}</td>
                 <td>{{ entity.keywords }}</td>
                 <td>{{ entity.description }}</td>
-                <td>{{ entity.online }}</td>
+                <td>
+                    {% if entity.online == true %}
+                        <span class="success">Online</span>
+                    {% else %}
+                        <span class="error">Offline</span>
+                    {% endif %}
+                </td>
                 <td class="action">
                         <a href="{{ path('admin_page_edit', { 'id': entity.id }) }}" class="edit">edit</a>
                 </td>
             </tr>
+            {% if entity.children|length > 0 %}
+            <tr class="children">
+                <td colspan="5">
+                    <table>
+                        <tbody>
+                        {% for child in entity.children %}
+                            <tr>
+                                <td>{{ child.title }}</td>
+                                <td>{{ child.keywords }}</td>
+                                <td>{{ child.description }}</td>
+                                <td>
+                                    {% if child.online == true %}
+                                        <span class="success">Online</span>
+                                    {% else %}
+                                        <span class="error">Offline</span>
+                                    {% endif %}
+                                </td>
+                                <td class="action">
+                                        <a href="{{ path('admin_page_edit', { 'id': child.id }) }}" class="edit">edit</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            {% endif %}
         {% endfor %}
         </tbody>
     </table>
