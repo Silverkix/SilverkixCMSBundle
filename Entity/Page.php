@@ -58,6 +58,11 @@ class Page
      */
     private $online;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $home;
+
     public function __construct() {
         $this->children = new \Doctrine\Common\Collections\ArrayCollection();
     }
@@ -196,6 +201,29 @@ class Page
     public function getOnline()
     {
         return $this->online;
+    }
+
+    /**
+     * Set home
+     *
+     * @param boolean $home
+     * @return Page
+     */
+    public function setHome($home)
+    {
+        $this->home = $home;
+
+        return $this;
+    }
+
+    /**
+     * Get home
+     *
+     * @return boolean
+     */
+    public function getHome()
+    {
+        return $this->home;
     }
 
     /**

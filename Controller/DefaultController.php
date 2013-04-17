@@ -6,8 +6,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class DefaultController extends Controller
 {
-    public function indexAction()
+    public function indexAction($slug)
     {
-        return $this->render('SilverkixCMSBundle:Site:index.html.twig');
+        $em = $this->getDoctrine()->getManager();
+
+        $page = $em->getRepository('SilverkixCMSBundle:Page')->findOneBySlug($slug);
+
+        return $this->render('SilverkixCMSBundle:Site:Page/normal.html.twig', array(
+            'page'      => $page,
+        ));
     }
 }
