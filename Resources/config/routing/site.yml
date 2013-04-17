@@ -10,6 +10,6 @@ admin_logout:
     path:   /logout
 
 ## Public website paths
-site_index:
+home:
     pattern:  /
     defaults: { _controller: SilverkixCMSBundle:Default:index }
