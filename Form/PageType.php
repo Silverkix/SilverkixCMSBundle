@@ -17,6 +17,7 @@ class PageType extends AbstractType
             ->add('content')
             ->add('online')
             ->add('parent')
+            ->add('home')
         ;
     }
 

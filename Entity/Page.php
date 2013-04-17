@@ -54,12 +54,12 @@ class Page
     private $parent;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true)
      */
     private $online;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true)
      */
     private $home;
 
@@ -212,6 +212,11 @@ class Page
     public function setHome($home)
     {
         $this->home = $home;
+
+        if($home)
+            $this->slug = '';
+        else
+            $this->slug = $this->CleanName($this->title);
 
         return $this;
     }

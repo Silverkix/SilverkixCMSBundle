@@ -41,6 +41,14 @@ class AdminPageController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+
+            if($entity->getHome())
+            {
+                $page = $em->getRepository("SilverkixCMSBundle:Page")->findOneByHome(array("home"=>1));
+                $page->setHome(false);
+                $em->flush();
+            }
+
             $em->persist($entity);
             $em->flush();
 
@@ -111,6 +119,15 @@ class AdminPageController extends Controller
         $editForm->bind($request);
 
         if ($editForm->isValid()) {
+
+            if($entity->getHome())
+            {
+                $page = $em->getRepository("SilverkixCMSBundle:Page")->findOneBy(array("home" =>1));
+
+                $page->setHome(false);
+                $em->flush();
+            }
+
             $em->persist($entity);
             $em->flush();
 
