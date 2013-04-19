@@ -13,3 +13,5 @@ admin_logout:
 home:
     pattern:  /{slug}
     defaults: { _controller: SilverkixCMSBundle:Default:index, slug: '' }
+    requirements:
+        slug: ".+"
