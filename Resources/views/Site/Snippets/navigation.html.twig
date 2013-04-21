@@ -1,7 +1,7 @@
 <nav>
     <ul>
-        <li><a href="#">nav ul li a</a></li>
-        <li><a href="#">nav ul li a</a></li>
-        <li><a href="#">nav ul li a</a></li>
+        {% for page in pages %}
+            <li><a href="{{ path('home', {slug: page.slug}) }}">{{ page.title }}</a></li>
+        {% endfor %}
     </ul>
 </nav>
