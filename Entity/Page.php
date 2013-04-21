@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Table(name="pages")
  * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks()
  */
 class Page
 {
@@ -37,7 +38,7 @@ class Page
     private $description;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      */
     private $content;
 
@@ -57,11 +58,6 @@ class Page
      * @ORM\Column(type="boolean", nullable=true)
      */
     private $online;
-
-    /**
-     * @ORM\Column(type="boolean", nullable=true)
-     */
-    private $home;
 
     public function __construct() {
         $this->children = new \Doctrine\Common\Collections\ArrayCollection();
@@ -86,7 +82,6 @@ class Page
     public function setTitle($title)
     {
         $this->title = $title;
-        $this->slug = $this->CleanName($title);
 
         return $this;
     }
@@ -204,39 +199,11 @@ class Page
     }
 
     /**
-     * Set home
-     *
-     * @param boolean $home
-     * @return Page
-     */
-    public function setHome($home)
-    {
-        $this->home = $home;
-
-        if($home)
-            $this->slug = '';
-        else
-            $this->slug = $this->CleanName($this->title);
-
-        return $this;
-    }
-
-    /**
-     * Get home
-     *
-     * @return boolean
-     */
-    public function getHome()
-    {
-        return $this->home;
-    }
-
-    /**
      * Clean name
      *
      * @return string
      */
-    private function CleanName($Raw){
+    public function CleanName($Raw){
         $clean = str_replace("'", '', $Raw);
         $clean = str_replace('-', ' ', $clean);
         $clean = preg_replace('~[^\\pL0-9_]+~u', '-', $clean); // substitutes anything but letters, numbers and '_' with separator
@@ -319,5 +286,24 @@ class Page
     public function __toString()
     {
         return $this->getTitle();
+    }
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function updateSlug()
+    {
+        // Only update if the slug is not emtpy
+        if($this->getSlug() !== '')
+        {
+            if($this->getParent() !== null)
+            {
+                $this->setSlug( $this->getParent()->getSlug()."/".$this->CleanName( $this->getTitle() ) );
+            }
+            else
+            {
+                $this->setSlug( $this->CleanName( $this->getTitle() ) );
+            }
+        }
     }
 }

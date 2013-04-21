@@ -41,14 +41,7 @@ class AdminPageController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-
-            if($entity->getHome())
-            {
-                $page = $em->getRepository("SilverkixCMSBundle:Page")->findOneByHome(array("home"=>1));
-                $page->setHome(false);
-                $em->flush();
-            }
-
+            $entity->setSlug($entity->CleanName( $entity->getTitle() ) );
             $em->persist($entity);
             $em->flush();
 
@@ -119,26 +112,6 @@ class AdminPageController extends Controller
         $editForm->bind($request);
 
         if ($editForm->isValid()) {
-
-            if($entity->getHome())
-            {
-                $page = $em->getRepository("SilverkixCMSBundle:Page")->findOneBy(array("home" =>1));
-
-                $page->setHome(false);
-                $em->flush();
-            }
-
-            if($entity->getParent() !== null)
-            {
-                $entity->setTitle($entity->getTitle());
-                $entity->setSlug($entity->getParent()->getSlug()."/".$entity->getSlug());
-            }
-            else
-            {
-                // Make sure we overwrite the slug if page is no longer set as child
-                // Due to doctrine, this will not be updated since the title field may not be touched
-                $entity->setTitle($entity->getTitle());
-            }
 
             $em->persist($entity);
             $em->flush();

@@ -17,6 +17,7 @@ class LoadPageData implements FixtureInterface
         $page = new Page();
 
         $page->setTitle("Testpagina");
+        $page->setSlug('');
         $page->setKeywords("Some, weird, keywords");
         $page->setDescription("A really useful description of this awesome page");
         $page->setContent("<h2>Subheading</h2><p>And a paragraphe</p>");
