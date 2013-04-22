@@ -6,6 +6,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class DefaultController extends Controller
 {
+    /**
+     * handle normal page requests
+     */
     public function indexAction($slug)
     {
         $em = $this->getDoctrine()->getManager();
