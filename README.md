@@ -70,4 +70,4 @@ In order to overwrite the fontend template you need to extend out bundle so you 
     }
 
 ### 6) Create public uploads folder
-`web/uploads` (chmod 777)
+`[PUBLIC_HTML]/uploads` (chmod 777)
