@@ -6,6 +6,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class HelperController extends Controller
 {
+    /**
+     * Render the navigation menu
+     */
     public function navigationAction()
     {
         $em = $this->getDoctrine()->getManager();
