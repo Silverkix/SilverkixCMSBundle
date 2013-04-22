@@ -68,3 +68,5 @@ In order to overwrite the fontend template you need to extend out bundle so you 
             return 'SilverkixCMSBundle';
         }
     }
+
+### 6) Create public uploads folder
