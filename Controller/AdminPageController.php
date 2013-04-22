@@ -22,7 +22,7 @@ class AdminPageController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('SilverkixCMSBundle:Page')->findByParent(null);
+        $entities = $em->getRepository('SilverkixCMSBundle:Page')->findBy(array("parent"=>null),array("orderid"=>"asc"));
 
         return $this->render('SilverkixCMSBundle:Admin:Page/index.html.twig', array(
             'entities' => $entities,

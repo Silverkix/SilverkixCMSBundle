@@ -21,6 +21,7 @@ class LoadPageData implements FixtureInterface
         $page->setKeywords("Some, weird, keywords");
         $page->setDescription("A really useful description of this awesome page");
         $page->setContent("<h2>Subheading</h2><p>And a paragraphe</p>");
+        $page->setOrderid(1);
         $page->setOnline(true);
 
         $manager->persist($page);
@@ -29,13 +30,12 @@ class LoadPageData implements FixtureInterface
 
         // Create a child page
         $page2->setTitle("Nog een pagina");
+        $page2->setSlug("nog-een-pagina");
         $page2->setKeywords("more, useless keywords");
         $page2->setDescription("This becomes a description");
         $page2->setContent("<h2>Subheading</h2><p>And a paragraphe</p>");
         $page2->setOnline(true);
-        $page2->setParent($page);
-
-        $page->addChildren($page2);
+        $page2->setOrderid(2);
 
         $manager->persist($page2);
 

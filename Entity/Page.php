@@ -59,6 +59,11 @@ class Page
      */
     private $online;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $orderid;
+
     public function __construct() {
         $this->children = new \Doctrine\Common\Collections\ArrayCollection();
     }
@@ -305,5 +310,28 @@ class Page
                 $this->setSlug( $this->CleanName( $this->getTitle() ) );
             }
         }
+    }
+
+    /**
+     * Set orderid
+     *
+     * @param integer $orderid
+     * @return Page
+     */
+    public function setOrderid($orderid)
+    {
+        $this->orderid = $orderid;
+
+        return $this;
+    }
+
+    /**
+     * Get orderid
+     *
+     * @return integer
+     */
+    public function getOrderid()
+    {
+        return $this->orderid;
     }
 }

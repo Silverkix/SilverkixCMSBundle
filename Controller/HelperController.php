@@ -13,7 +13,7 @@ class HelperController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $pages = $em->getRepository('SilverkixCMSBundle:Page')->findBy(array("parent"=>null));
+        $pages = $em->getRepository('SilverkixCMSBundle:Page')->findBy(array("parent"=>null), array("orderid"=>"asc"));
 
         return $this->render('SilverkixCMSBundle:Site:Snippets/navigation.html.twig', array(
             'pages'      => $pages,
