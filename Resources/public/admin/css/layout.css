@@ -214,10 +214,11 @@ p {
 	padding: 0 20px 0 10px;
 }
 
-#main table tr .action a { margin: 0 0 0 10px; text-decoration: none; color: #9b9b9b; }
+#main table tr .action a { margin: 0; text-decoration: none; color: #9b9b9b; }
 #main table tr:hover .action .edit { color: #c5a059; }
 #main table tr:hover .action .delete { color: #a02b2b; }
 #main table tr:hover .action .view { color: #55a34a; }
+#main table tr .action a.hidden {visibility: hidden;}
 
 #main table tr:hover .action a:hover { text-decoration: underline; }
 
