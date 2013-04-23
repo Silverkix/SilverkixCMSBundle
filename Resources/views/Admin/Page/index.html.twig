@@ -32,7 +32,11 @@
                         <a href="{{ path('admin_page_move_up', { 'id': entity.id }) }}" {% if loop.first %}class="hidden"{% endif %}><img src="{{ asset('/bundles/silverkixcms/admin/img/beige/arrow-up.gif') }}"/></a>
                         <a href="{{ path('admin_page_move_down', { 'id': entity.id }) }}" {% if loop.last %}class="hidden"{% endif %}><img src="{{ asset('/bundles/silverkixcms/admin/img/beige/arrow-down.gif') }}"/></a>&nbsp;&nbsp;&nbsp;&nbsp;
                         <a href="{{ path('admin_page_edit', { 'id': entity.id }) }}" class="edit"><img src="{{ asset('/bundles/silverkixcms/admin/img/green/edit.gif') }}"/></a>
-                        <a href="#" class="delete" rel="{{ path('admin_page_delete', { 'id': entity.id }) }}"><img src="{{ asset('/bundles/silverkixcms/admin/img/blue/trash.gif') }}"/></a>
+                        {% if entity.slug != '' %}
+                            <a href="#" class="delete" rel="{{ path('admin_page_delete', { 'id': entity.id }) }}"><img src="{{ asset('/bundles/silverkixcms/admin/img/blue/trash.gif') }}"/></a>
+                        {% else %}
+                            <a href="#" class="hidden"><img src="{{ asset('/bundles/silverkixcms/admin/img/blue/trash.gif') }}"/></a>
+                        {% endif %}
                 </td>
             </tr>
             {% if entity.children|length > 0 %}
