@@ -43,9 +43,7 @@ class AdminPageController extends Controller
             $em = $this->getDoctrine()->getManager();
 
             $siblings = $em->getRepository("SilverkixCMSBundle:Page")->findByParent($entity->getParent(), array("orderid"=>"asc"));
-
             $next = count($siblings) > 0 ? $siblings[ count($siblings) - 1 ]->getOrderid() + 1 : 1;
-
             $entity->setOrderid($next);
 
             $em->persist($entity);
@@ -108,6 +106,8 @@ class AdminPageController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('SilverkixCMSBundle:Page')->find($id);
+        // Get the old parent before it is overwritten by the form
+        $parent = $entity->getParent();
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Page entity.');
@@ -119,8 +119,34 @@ class AdminPageController extends Controller
 
         if ($editForm->isValid()) {
 
-            $em->persist($entity);
-            $em->flush();
+            // Figure out the new orderid
+            if($parent !== $entity->getParent())
+            {
+                $siblings = $em->getRepository("SilverkixCMSBundle:Page")->findByParent($entity->getParent(), array("orderid"=>"asc"));
+                $next = count($siblings) > 0 ? $siblings[ count($siblings) - 1 ]->getOrderid() + 1 : 1;
+                $entity->setOrderid( $next );
+
+                $em->persist($entity);
+                $em->flush();
+
+                // Update old siblings
+                $oldSiblings = $em->getRepository("SilverkixCMSBundle:Page")->findByParent($parent, array("orderid"=>"asc"));
+                if($oldSiblings)
+                {
+                    for($i = 0; $i < count($oldSiblings); $i++)
+                    {
+                        $oldSiblings[$i]->setOrderid( $i + 1);
+                        var_dump($oldSiblings[$i]->getId()." - ".$oldSiblings[$i]->getOrderid());
+                        $em->persist($oldSiblings[$i]);
+                    }
+                    $em->flush();
+                }
+            }
+            else
+            {
+                $em->persist($entity);
+                $em->flush();
+            }
 
             return $this->redirect($this->generateUrl('admin_page'));
         }
