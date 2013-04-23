@@ -136,7 +136,6 @@ class AdminPageController extends Controller
                     for($i = 0; $i < count($oldSiblings); $i++)
                     {
                         $oldSiblings[$i]->setOrderid( $i + 1);
-                        var_dump($oldSiblings[$i]->getId()." - ".$oldSiblings[$i]->getOrderid());
                         $em->persist($oldSiblings[$i]);
                     }
                     $em->flush();

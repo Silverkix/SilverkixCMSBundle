@@ -45,6 +45,7 @@ class Page
     // ...
     /**
      * @ORM\OneToMany(targetEntity="Page", mappedBy="parent")
+     * @ORM\OrderBy({"orderid" = "ASC"})
      **/
     private $children;
 
