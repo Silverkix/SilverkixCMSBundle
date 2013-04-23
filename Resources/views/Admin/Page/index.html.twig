@@ -30,8 +30,8 @@
                 </td>
                 <td class="action">
                         <a href="{{ path('admin_page_edit', { 'id': entity.id }) }}" class="edit"><img src="{{ asset('/bundles/silverkixcms/admin/img/blue/edit.gif') }}"/></a>
-                        <a href="#" {% if loop.first %}class="hidden"{% endif %}><img src="{{ asset('/bundles/silverkixcms/admin/img/blue/arrow-up.gif') }}"/></a>
-                        <a href="#" {% if loop.last %}class="hidden"{% endif %}><img src="{{ asset('/bundles/silverkixcms/admin/img/blue/arrow-down.gif') }}"/></a>
+                        <a href="{{ path('admin_page_move_up', { 'id': entity.id }) }}" {% if loop.first %}class="hidden"{% endif %}><img src="{{ asset('/bundles/silverkixcms/admin/img/blue/arrow-up.gif') }}"/></a>
+                        <a href="{{ path('admin_page_move_down', { 'id': entity.id }) }}" {% if loop.last %}class="hidden"{% endif %}><img src="{{ asset('/bundles/silverkixcms/admin/img/blue/arrow-down.gif') }}"/></a>
                 </td>
             </tr>
             {% if entity.children|length > 0 %}
@@ -52,9 +52,9 @@
                                     {% endif %}
                                 </td>
                                 <td class="action">
-                                    <a href="{{ path('admin_page_edit', { 'id': entity.id }) }}" class="edit"><img src="{{ asset('/bundles/silverkixcms/admin/img/blue/edit.gif') }}"/></a>
-                                    <a href="#" {% if loop.first %}class="hidden"{% endif %}><img src="{{ asset('/bundles/silverkixcms/admin/img/blue/arrow-up.gif') }}"/></a>
-                                    <a href="#" {% if loop.last %}class="hidden"{% endif %}><img src="{{ asset('/bundles/silverkixcms/admin/img/blue/arrow-down.gif') }}"/></a>
+                                    <a href="{{ path('admin_page_edit', { 'id': child.id }) }}" class="edit"><img src="{{ asset('/bundles/silverkixcms/admin/img/blue/edit.gif') }}"/></a>
+                                    <a href="{{ path('admin_page_move_up', { 'id': child.id }) }}" {% if loop.first %}class="hidden"{% endif %}><img src="{{ asset('/bundles/silverkixcms/admin/img/blue/arrow-up.gif') }}"/></a>
+                                    <a href="{{ path('admin_page_move_down', { 'id': child.id }) }}" {% if loop.last %}class="hidden"{% endif %}><img src="{{ asset('/bundles/silverkixcms/admin/img/blue/arrow-down.gif') }}"/></a>
                                 </td>
                             </tr>
                         {% endfor %}

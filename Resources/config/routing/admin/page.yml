@@ -24,3 +24,13 @@ admin_page_delete:
     pattern:  /{id}/delete
     defaults: { _controller: "SilverkixCMSBundle:AdminPage:delete" }
     requirements: { _method: post|delete }
+
+admin_page_move_up:
+    pattern:  /{id}/up
+    defaults: { _controller: "SilverkixCMSBundle:AdminPage:moveUp" }
+    requirements: { _method: get }
+
+admin_page_move_down:
+    pattern:  /{id}/down
+    defaults: { _controller: "SilverkixCMSBundle:AdminPage:moveDown" }
+    requirements: { _method: get }

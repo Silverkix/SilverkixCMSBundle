@@ -158,6 +158,52 @@ class AdminPageController extends Controller
     }
 
     /**
+     * Move a page up in a group
+     */
+    public function moveUpAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $page = $em->getRepository("SilverkixCMSBundle:Page")->find($id);
+
+        $page->setOrderid($page->getOrderid() - 1);
+        $otherPage = $em->getRepository("SilverkixCMSBundle:Page")->findOneBy(
+            array(
+                "parent" => $page->getParent(),
+                "orderid" => $page->getOrderid()
+                )
+            );
+        $otherPage->setOrderid($otherPage->getOrderid() + 1);
+        $em->flush();
+
+        return $this->redirect($this->generateUrl('admin_page'));
+    }
+
+    /**
+     * Move a page down in a group
+     */
+    public function moveDownAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $page = $em->getRepository("SilverkixCMSBundle:Page")->find($id);
+
+        $page->setOrderid($page->getOrderid() + 1);
+
+
+        $otherPage = $em->getRepository("SilverkixCMSBundle:Page")->findOneBy(
+            array(
+                "parent" => $page->getParent(),
+                "orderid" => $page->getOrderid()
+                )
+            );
+
+        $otherPage->setOrderid($otherPage->getOrderid() - 1);
+
+        $em->flush();
+
+        return $this->redirect($this->generateUrl('admin_page'));
+    }
+
+    /**
      * Deletes a Page entity.
      *
      */
