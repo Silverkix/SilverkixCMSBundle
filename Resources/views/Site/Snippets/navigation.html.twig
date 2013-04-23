@@ -1,16 +1,20 @@
-<nav>
-    <ul>
-        {% for page in pages %}
-            <li>
-                <a href="{{ path('home', {slug: page.slug}) }}">{{ page.title }}</a>
-                {% if page.children|length > 0 %}
-                    <ul>
-                        {% for subpage in page.children %}
-                            <li><a href="{{ path('home', {slug: subpage.slug}) }}">{{ subpage.title }}</a></li>
-                        {% endfor %}
-                    </ul>
-                {% endif %}
-            </li>
-        {% endfor %}
-    </ul>
-</nav>
+  <nav id="access" class="access" role="navigation">
+        <div id="menu" class="menu">
+            <ul id="tiny">
+                {% for page in pages %}
+                    <li>
+                        <a href="{{ path('home', {slug: page.slug}) }}">{{ page.title }}</a>
+                        {% if page.children|length > 0 %}
+                            <ul>
+                                {% for subpage in page.children %}
+                                    <li><a href="{{ path('home', {slug: subpage.slug}) }}">{{ subpage.title }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="triangle-l"></div>
+        <div class="triangle-r"></div>
+  </nav>
