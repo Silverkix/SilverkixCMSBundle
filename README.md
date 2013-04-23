@@ -4,12 +4,18 @@ This bundle will help you kickstart any project requiring a simple CMS. This wil
 This cms includes the following features:
 
 * Pages (include Seo data)
-* Blog (including categories and tags)
 * User management
 
 ## installation
 
 ###[[TODO]] 1) Using composer
+Add the bundle to your composer
+
+    "require": {
+        ....,
+        "silverkix/cms-bundle": "dev-master",
+        .....
+    },
 
 ### 2) Past to `security.yml`
     security:
@@ -49,7 +55,11 @@ Run `php app/console doctrine:schema:update` to update the database
 ### 4) Load fixtures
 add the fixtures bundle to your kernel:
 
-`new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),`
+    $bundles = array(
+        ....,
+        new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
+        ....,
+    );
 
 ### 5) Extend your bundle
 In order to overwrite the fontend template you need to extend out bundle so you can overwrite any necessary stuffz.
