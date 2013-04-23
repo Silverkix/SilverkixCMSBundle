@@ -207,20 +207,38 @@ class AdminPageController extends Controller
      * Deletes a Page entity.
      *
      */
-    public function deleteAction(Request $request, $id)
+    public function deleteAction($id)
     {
-        $form = $this->createDeleteForm($id);
-        $form->bind($request);
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('SilverkixCMSBundle:Page')->find($id);
+        $parent = $entity->getParent();
 
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('SilverkixCMSBundle:Page')->find($id);
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Page entity.');
+        }
 
-            if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Page entity.');
+        $children = $em->getRepository('SilverkixCMSBundle:Page')->findByParent($entity);
+
+        if(count($children) > 0)
+        {
+            foreach($children as $child)
+            {
+                $em->remove($child);
             }
+        }
 
-            $em->remove($entity);
+        $em->remove($entity);
+        $em->flush();
+
+        // Update old siblings
+        $oldSiblings = $em->getRepository("SilverkixCMSBundle:Page")->findByParent($parent, array("orderid"=>"asc"));
+        if($oldSiblings)
+        {
+            for($i = 0; $i < count($oldSiblings); $i++)
+            {
+                $oldSiblings[$i]->setOrderid( $i + 1);
+                $em->persist($oldSiblings[$i]);
+            }
             $em->flush();
         }
 

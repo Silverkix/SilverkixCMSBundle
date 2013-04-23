@@ -23,7 +23,7 @@ admin_page_update:
 admin_page_delete:
     pattern:  /{id}/delete
     defaults: { _controller: "SilverkixCMSBundle:AdminPage:delete" }
-    requirements: { _method: post|delete }
+    requirements: { _method: get }
 
 admin_page_move_up:
     pattern:  /{id}/up

@@ -196,12 +196,12 @@ p {
 
 #main table tr.haschildren td
 {
-	border-bottom: 1px dotted #333;
+	border-bottom: 1px solid #333;
 }
 
 
 #main table tr.children td {
-	border-bottom: none;
+	border-bottom: 1px dashed #333
 }
 
 #main table tr.odd td {

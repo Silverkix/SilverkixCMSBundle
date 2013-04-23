@@ -27,7 +27,10 @@
             <tr>
                 <td colspan="3">{{ form_widget(form.content) }}</td>
                 <script>
-                    CKEDITOR.replace( 'silverkix_cmsbundle_pagetype[content]');
+                $(document).ready(function()
+                    {
+                        CKEDITOR.replace( 'silverkix_cmsbundle_pagetype[content]');
+                    });
                 </script>
             </tr>
             <tr>
