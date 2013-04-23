@@ -42,16 +42,19 @@ class AdminPageController extends Controller
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
 
+            // Get siblings and determ which is the next orderid
             $siblings = $em->getRepository("SilverkixCMSBundle:Page")->findByParent($entity->getParent(), array("orderid"=>"asc"));
             $next = count($siblings) > 0 ? $siblings[ count($siblings) - 1 ]->getOrderid() + 1 : 1;
             $entity->setOrderid($next);
 
+            // Welcome to the family!
             $em->persist($entity);
             $em->flush();
 
             return $this->redirect($this->generateUrl('admin_page'));
         }
 
+        // Render the new page form
         return $this->render('SilverkixCMSBundle:Admin:Page/new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
@@ -105,23 +108,28 @@ class AdminPageController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
+        // Get the page being edited
         $entity = $em->getRepository('SilverkixCMSBundle:Page')->find($id);
+
         // Get the old parent before it is overwritten by the form
         $parent = $entity->getParent();
 
+        // Check if we found the page being edited
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Page entity.');
         }
 
-        $deleteForm = $this->createDeleteForm($id);
+        // Create edit form
         $editForm = $this->createForm(new PageType(), $entity);
         $editForm->bind($request);
 
+        // Check if the form is valid
         if ($editForm->isValid()) {
 
-            // Figure out the new orderid
             if($parent !== $entity->getParent())
             {
+                // it seems we have been adopted by new parents
+                // Lets say hi to our new siblings and goodbye to our old siblings
                 $siblings = $em->getRepository("SilverkixCMSBundle:Page")->findByParent($entity->getParent(), array("orderid"=>"asc"));
                 $next = count($siblings) > 0 ? $siblings[ count($siblings) - 1 ]->getOrderid() + 1 : 1;
                 $entity->setOrderid( $next );
@@ -143,13 +151,16 @@ class AdminPageController extends Controller
             }
             else
             {
+                // We still have the same parents so we can just save everything
                 $em->persist($entity);
                 $em->flush();
             }
 
+            // Return to the admin page
             return $this->redirect($this->generateUrl('admin_page'));
         }
 
+        // Render the edit form
         return $this->render('SilverkixCMSBundle:Admin:Page/edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
@@ -165,7 +176,10 @@ class AdminPageController extends Controller
         $em = $this->getDoctrine()->getManager();
         $page = $em->getRepository("SilverkixCMSBundle:Page")->find($id);
 
+        // Set the new order id
         $page->setOrderid($page->getOrderid() - 1);
+
+        // Get the sibling to switch with
         $otherPage = $em->getRepository("SilverkixCMSBundle:Page")->findOneBy(
             array(
                 "parent" => $page->getParent(),
@@ -173,6 +187,8 @@ class AdminPageController extends Controller
                 )
             );
         $otherPage->setOrderid($otherPage->getOrderid() + 1);
+
+        // Save to db
         $em->flush();
 
         return $this->redirect($this->generateUrl('admin_page'));
@@ -186,18 +202,19 @@ class AdminPageController extends Controller
         $em = $this->getDoctrine()->getManager();
         $page = $em->getRepository("SilverkixCMSBundle:Page")->find($id);
 
+        // Set the new order id
         $page->setOrderid($page->getOrderid() + 1);
 
-
+        // Find the sibling to switch with
         $otherPage = $em->getRepository("SilverkixCMSBundle:Page")->findOneBy(
             array(
                 "parent" => $page->getParent(),
                 "orderid" => $page->getOrderid()
                 )
             );
-
         $otherPage->setOrderid($otherPage->getOrderid() - 1);
 
+        // Save to database
         $em->flush();
 
         return $this->redirect($this->generateUrl('admin_page'));
@@ -211,14 +228,18 @@ class AdminPageController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('SilverkixCMSBundle:Page')->find($id);
+
+        // Save the parent to update the siblings later
         $parent = $entity->getParent();
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Page entity.');
         }
 
+        // Find all siblings to say goodby
         $children = $em->getRepository('SilverkixCMSBundle:Page')->findByParent($entity);
 
+        // Remove all children
         if(count($children) > 0)
         {
             foreach($children as $child)
@@ -227,6 +248,7 @@ class AdminPageController extends Controller
             }
         }
 
+        // Remove parents
         $em->remove($entity);
         $em->flush();
 
@@ -242,21 +264,7 @@ class AdminPageController extends Controller
             $em->flush();
         }
 
+        // Return to admin page
         return $this->redirect($this->generateUrl('admin_page'));
-    }
-
-    /**
-     * Creates a form to delete a Page entity by id.
-     *
-     * @param mixed $id The entity id
-     *
-     * @return Symfony\Component\Form\Form The form
-     */
-    private function createDeleteForm($id)
-    {
-        return $this->createFormBuilder(array('id' => $id))
-            ->add('id', 'hidden')
-            ->getForm()
-        ;
     }
 }
