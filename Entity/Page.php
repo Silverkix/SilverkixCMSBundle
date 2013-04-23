@@ -295,6 +295,7 @@ class Page
 
     /**
      * @ORM\PreUpdate
+     * @ORM\PrePersist
      */
     public function updateSlug()
     {

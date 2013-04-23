@@ -41,7 +41,13 @@ class AdminPageController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity->setSlug($entity->CleanName( $entity->getTitle() ) );
+
+            $siblings = $em->getRepository("SilverkixCMSBundle:Page")->findByParent($entity->getParent(), array("orderid"=>"asc"));
+
+            $next = count($siblings) > 0 ? $siblings[ count($siblings) - 1 ]->getOrderid() + 1 : 1;
+
+            $entity->setOrderid($next);
+
             $em->persist($entity);
             $em->flush();
 
