@@ -17,6 +17,10 @@ Add the bundle to your composer
         .....
     },
 
+Run your composer update
+
+    $ php composer.phar update
+
 ### 2) Past to `security.yml`
     security:
         encoders:
