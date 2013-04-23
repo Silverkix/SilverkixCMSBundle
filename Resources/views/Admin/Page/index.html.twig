@@ -8,16 +8,16 @@
     <table class="records_list">
         <thead>
             <tr>
-                <th>Title</th>
-                <th>Keywords</th>
-                <th>Description</th>
-                <th>Online</th>
-                <th>Actions</th>
+                <th width="20%">Title</th>
+                <th width="20%">Keywords</th>
+                <th width="30%">Description</th>
+                <th width="10%">Online</th>
+                <th width="20%">Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for entity in entities %}
-            <tr>
+            <tr {% if entity.children|length > 0 %}class="haschildren"{% endif %}>
                 <td>{{ entity.title }}</td>
                 <td>{{ entity.keywords }}</td>
                 <td>{{ entity.description }}</td>
@@ -29,39 +29,33 @@
                     {% endif %}
                 </td>
                 <td class="action">
-                        <a href="{{ path('admin_page_edit', { 'id': entity.id }) }}" class="edit"><img src="{{ asset('/bundles/silverkixcms/admin/img/blue/edit.gif') }}"/></a>
-                        <a href="{{ path('admin_page_move_up', { 'id': entity.id }) }}" {% if loop.first %}class="hidden"{% endif %}><img src="{{ asset('/bundles/silverkixcms/admin/img/blue/arrow-up.gif') }}"/></a>
-                        <a href="{{ path('admin_page_move_down', { 'id': entity.id }) }}" {% if loop.last %}class="hidden"{% endif %}><img src="{{ asset('/bundles/silverkixcms/admin/img/blue/arrow-down.gif') }}"/></a>
+                        <a href="{{ path('admin_page_move_up', { 'id': entity.id }) }}" {% if loop.first %}class="hidden"{% endif %}><img src="{{ asset('/bundles/silverkixcms/admin/img/beige/arrow-up.gif') }}"/></a>
+                        <a href="{{ path('admin_page_move_down', { 'id': entity.id }) }}" {% if loop.last %}class="hidden"{% endif %}><img src="{{ asset('/bundles/silverkixcms/admin/img/beige/arrow-down.gif') }}"/></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <a href="{{ path('admin_page_edit', { 'id': entity.id }) }}" class="edit"><img src="{{ asset('/bundles/silverkixcms/admin/img/green/edit.gif') }}"/></a>
+                        <a href="{{ path('admin_page_delete', { 'id': entity.id }) }}"><img src="{{ asset('/bundles/silverkixcms/admin/img/blue/trash.gif') }}"/></a>
                 </td>
             </tr>
             {% if entity.children|length > 0 %}
-            <tr class="children">
-                <td colspan="5">
-                    <table>
-                        <tbody>
-                        {% for child in entity.children %}
-                            <tr>
-                                <td>{{ child.title }}</td>
-                                <td>{{ child.keywords }}</td>
-                                <td>{{ child.description }}</td>
-                                <td>
-                                    {% if child.online == true %}
-                                        <span class="success">Online</span>
-                                    {% else %}
-                                        <span class="error">Offline</span>
-                                    {% endif %}
-                                </td>
-                                <td class="action">
-                                    <a href="{{ path('admin_page_edit', { 'id': child.id }) }}" class="edit"><img src="{{ asset('/bundles/silverkixcms/admin/img/blue/edit.gif') }}"/></a>
-                                    <a href="{{ path('admin_page_move_up', { 'id': child.id }) }}" {% if loop.first %}class="hidden"{% endif %}><img src="{{ asset('/bundles/silverkixcms/admin/img/blue/arrow-up.gif') }}"/></a>
-                                    <a href="{{ path('admin_page_move_down', { 'id': child.id }) }}" {% if loop.last %}class="hidden"{% endif %}><img src="{{ asset('/bundles/silverkixcms/admin/img/blue/arrow-down.gif') }}"/></a>
-                                </td>
-                            </tr>
-                        {% endfor %}
-                        </tbody>
-                    </table>
-                </td>
-            </tr>
+                {% for child in entity.children %}
+                    <tr class="children">
+                        <td>{{ child.title }}</td>
+                        <td>{{ child.keywords }}</td>
+                        <td>{{ child.description }}</td>
+                        <td>
+                            {% if child.online == true %}
+                                <span class="success">Online</span>
+                            {% else %}
+                                <span class="error">Offline</span>
+                            {% endif %}
+                        </td>
+                        <td class="action">
+                            <a href="{{ path('admin_page_move_up', { 'id': child.id }) }}" {% if loop.first %}class="hidden"{% endif %}><img src="{{ asset('/bundles/silverkixcms/admin/img/beige/arrow-up.gif') }}"/></a>
+                            <a href="{{ path('admin_page_move_down', { 'id': child.id }) }}" {% if loop.last %}class="hidden"{% endif %}><img src="{{ asset('/bundles/silverkixcms/admin/img/beige/arrow-down.gif') }}"/></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <a href="{{ path('admin_page_edit', { 'id': child.id }) }}" class="edit"><img src="{{ asset('/bundles/silverkixcms/admin/img/green/edit.gif') }}"/></a>
+                            <a href="{{ path('admin_page_delete', { 'id': child.id }) }}"><img src="{{ asset('/bundles/silverkixcms/admin/img/blue/trash.gif') }}"/></a>
+                        </td>
+                    </tr>
+                {% endfor %}
             {% endif %}
         {% endfor %}
         </tbody>

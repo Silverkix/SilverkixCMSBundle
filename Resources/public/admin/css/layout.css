@@ -169,7 +169,7 @@ p {
 }
 
 #main table {
-	border-top: 1px solid #ddd;
+	border-top: 2px solid #333;
 	width: 700px;
 }
 
@@ -180,20 +180,27 @@ p {
 
 #main table tr th {
 	padding: 10px;
+	border-bottom: 2px solid #333;
+	background: #333;
+	color: #fff;
 }
 
-#main table tr.children td td,
 #main table tr td {
-	background: #f6f6f6;
+	background: #fff;
 	padding: 10px;
 	height: 29px;
 	line-height: 29px;
-	border-bottom: 1px solid #ddd;
+	border-bottom: 2px solid #333;
+	color: #646464;
 }
 
+#main table tr.haschildren td
+{
+	border-bottom: 1px dotted #333;
+}
+
+
 #main table tr.children td {
-	padding: 0 0 0 40px;
-	background: #fff;
 	border-bottom: none;
 }
 
