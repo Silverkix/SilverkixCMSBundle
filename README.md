@@ -113,6 +113,18 @@ To open the admin panel you navigate to `/app_dev.php/admin`. Default admin user
     Username: admin
     Password: mypass
 
+## Adding Your Frontend
+In order to put your own frontend on the website you need to overwrite the one from this bundle.
+Since you extended the bundle in step #6, all you have to do is copy the template files you want to overwrite to your bundle.
+
+Generally you will only need to overwrite `index.html.twig`, but you can overwrite any template you want.
+
+    $ cp vendor/silverkix/cms-bundle/Silverkix/CMSBundle/Resources/views/Site/index.html.twig src/Acme/DemoBundle/Resources/views/Site
+
+As you can see the front-end templates reside in `views/Site` while the admin templates reside in `views/Admin`.
+
+This is also the case for public files. See `public/admin/` for backend files and `public/site/` for frontend files.
+
 ## Collaboration
 Feel free to fork this repo and add / improve features.
 Any pull requests and / or issues are very welcome!
