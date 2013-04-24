@@ -6,10 +6,10 @@ This cms includes the following features:
 * Pages (include Seo data)
 * User management
 
-## installation
+## Installation
 
-###[[TODO]] 1) Using composer
-Add the bundle to your composer
+### 1) Using composer
+Add the bundle to your composer.json
 
     "require": {
         ....,
@@ -21,7 +21,7 @@ Run your composer update
 
     $ php composer.phar update
 
-### 2) Past to `security.yml`
+### 2) Paste to `security.yml`
     security:
         encoders:
             Silverkix\CMSBundle\Entity\User:
@@ -53,10 +53,23 @@ Run your composer update
         access_control:
             - { path: ^/admin, roles: ROLE_ADMIN }
 
-### 3) Update database
+### 3) Add routing
+Add these two routes to your `app/config/routing.yml`
+
+    ## CMSBundle admin routing
+    admin:
+        resource: "@SilverkixCMSBundle/Resources/config/routing/admin.yml"
+        prefix:   /admin
+
+    ## CMSBundle Site routing
+    site:
+        resource: "@SilverkixCMSBundle/Resources/config/routing/site.yml"
+        prefix:   /
+
+### 4) Update database
 Run `php app/console doctrine:schema:update` to update the database
 
-### 4) Load fixtures
+### 5) Load fixtures
 add the fixtures bundle to your kernel:
 
     $bundles = array(
@@ -65,8 +78,8 @@ add the fixtures bundle to your kernel:
         ....,
     );
 
-### 5) Extend your bundle
-In order to overwrite the fontend template you need to extend out bundle so you can overwrite any necessary stuffz.
+### 6) Extend your bundle
+In order to overwrite the frontend template you need to extend out bundle so you can overwrite any necessary stuffz.
 
     <?php
     // src/Acme/DemoBundle/AcmeDemoBundle.php
@@ -83,5 +96,26 @@ In order to overwrite the fontend template you need to extend out bundle so you 
         }
     }
 
-### 6) Create public uploads folder
+### 7) Create public uploads folder
 `[PUBLIC_HTML]/uploads` (chmod 777)
+
+### 8) Clear Cache / Install Assets
+clear your cache and install your assets
+
+    $ php app/console cache:clear
+    $ php app/console assets:install
+
+### 9) See your brand new website!
+You can now see your website at `http://localhost/app_dev.php` (if that is the local url of your installation of course!)
+
+To open the admin panel you navigate to `/app_dev.php/admin`. Default admin user:
+
+    Username: admin
+    Password: mypass
+
+## Collaboration
+Feel free to fork this repo and add / improve features.
+Any pull requests and / or issues are very welcome!
+
+## License
+[Creative Commons Attribution-ShareAlike 3.0 Unported](http://creativecommons.org/licenses/by-sa/3.0/legalcode)

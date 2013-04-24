@@ -28,7 +28,7 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface
         // Create encoder and hashed password
         $factory = $this->container->get('security.encoder_factory');
         $encoder = $factory->getEncoder($userAdmin);
-        $password = $encoder->encodePassword('adminpass', $userAdmin->getSalt());
+        $password = $encoder->encodePassword('mypass', $userAdmin->getSalt());
 
         // Set user data
         $userAdmin->setUsername('admin');
