@@ -10,7 +10,7 @@ class AdminController extends Controller
     /* Render the index of the admin panel */
     public function indexAction()
     {
-        return $this->render('SilverkixCMSBundle:Admin:index.html.twig');
+        return $this->redirect($this->generateUrl('admin_page'));
     }
 
     /************************************************
