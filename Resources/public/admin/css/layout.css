@@ -27,9 +27,9 @@ body {
 
 h1 {
 	margin: 15px 0 10px 5px;
-	width: 225px;
-	height: 28px;
-	background: url(../img/transdmin-light.gif) no-repeat left top;
+	width: 443px;
+	height: 79px;
+	background: url(../img/logo.png) no-repeat left top;
 }
 
 h1 a {
@@ -100,6 +100,11 @@ h1 span { display: none; }
 #sidebar {
 	width: 179px;
 	float: left;
+}
+
+#sidebar p {
+	padding: 0 10px;
+	line-height: 1.5em;
 }
 
 #sidebar .sideNav { width: 179px; }
@@ -314,6 +319,7 @@ p {
 	line-height: 11px;
 	color: #9B9B9B;
 	padding: 0 0 0 5px;
+	text-align: right;
 }
 
 #footer a { color: #9B9B9B; }

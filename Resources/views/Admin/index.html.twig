@@ -22,12 +22,11 @@
 <body>
     <div id="wrapper">
         <!-- h1 tag stays for the logo, you can use the a tag for linking the index page -->
-        <h1><a href="#"><span>Transdmin Light</span></a></h1>
+        <h1><a href="#"><span>Silverkix | CMS</span></a></h1>
 
         <!-- You can name the links with lowercase, they will be transformed to uppercase by CSS, we prefered to name them with uppercase to have the same effect with disabled stylesheet -->
         <ul id="mainNav">
             <li><a href="{{path('admin_page')}}" {% if "/admin/page/" in app.request.server.get('PATH_INFO') %}class="active"{% endif %}>PAGES</a></li>
-            <li><a href="#">BLOG</a></li>
             <li><a href="{{path('admin_user')}}" {% if "/admin/user/" in app.request.server.get('PATH_INFO') %}class="active"{% endif %}>USERS</a></li>
             <li class="logout"><a href="{{path('admin_logout')}}">LOGOUT</a></li>
             <li class="logout"><a href="{{path('home')}}">VIEW SITE</a></li>
@@ -37,16 +36,9 @@
         <div id="containerHolder">
             <div id="container">
                 <div id="sidebar">
-                    <p>Hey hallo, dit is een stukje tekst in de sidebar</p>
-                    <!--
-                    <ul class="sideNav">
-                        <li><a href="#">Exchange</a></li>
-                        <li><a href="#" class="active">Print resources</a></li>
-                        <li><a href="#">Training &amp; Support</a></li>
-                        <li><a href="#">Books</a></li>
-                        <li><a href="#">Safari books online</a></li>
-                        <li><a href="#">Events</a></li>
-                    </ul>
+                    <p>Hi there, thanks for using the <a href="https://github.com/Silverkix/SilverkixCMSBundle" target="_blank">SilverkixCMSBundle</a>! It seems you have set everything up correctly and are all ready to go from here. All that's left to do is overwrite the front-end template and create a new admin user.</p>
+                    <p>You can fork this bundle over at <a href="https://github.com/Silverkix/SilverkixCMSBundle" target="_blank">Github</a>.</p>
+                    <p>If you have any issues, feel free to submit them to the <a href="https://github.com/Silverkix/SilverkixCMSBundle/issues" target="_blank">issuetracker on Github</a>.</p>
                     <!-- // .sideNav -->
                 </div>
                 <!-- // #sidebar -->
@@ -66,7 +58,7 @@
         </div>
         <!-- // #containerHolder -->
 
-        <p id="footer">Feel free to use and customize it. <a href="http://www.perspectived.com">Credit is appreciated.</a></p>
+        <p id="footer">Silverkix CMS Bundle made by <a href="http://github.com/christianvermeulen">Christian Vermeulen</a> | Admin template made by <a href="http://www.perspectived.com">perspectived.com</a>.</p>
     </div>
     <!-- // #wrapper -->
     <!-- Custom scripts and styles -->
