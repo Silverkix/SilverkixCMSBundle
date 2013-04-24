@@ -91,12 +91,10 @@ class AdminPageController extends Controller
         }
 
         $editForm = $this->createForm(new PageType(), $entity);
-        $deleteForm = $this->createDeleteForm($id);
 
         return $this->render('SilverkixCMSBundle:Admin:Page/edit.html.twig', array(
             'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+            'edit_form'   => $editForm->createView()
         ));
     }
 

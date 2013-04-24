@@ -5,6 +5,7 @@ namespace Silverkix\CMSBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Doctrine\ORM\EntityRepository;
 
 class PageType extends AbstractType
 {
@@ -16,7 +17,18 @@ class PageType extends AbstractType
             ->add('description')
             ->add('content')
             ->add('online')
-            ->add('parent')
+            ->add('parent', 'entity', array(
+                'class' => 'SilverkixCMSBundle:Page',
+                'query_builder' => function(EntityRepository $er) {
+                    return $er->createQueryBuilder('p')
+                        ->where('p.parent is Null AND p.slug != ?1')
+                        ->setParameter(1, '');
+                },
+                "empty_value" => "== Root Page ==",
+                "empty_data" => null,
+                "required" => false
+                )
+            )
         ;
     }
 
