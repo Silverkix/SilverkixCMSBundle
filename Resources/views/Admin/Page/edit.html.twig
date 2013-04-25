@@ -54,4 +54,14 @@
 
 {% block scripts %}
 <script src="{{ asset('/bundles/silverkixcms/ckeditor/ckeditor.js') }}"></script>
+<script type="text/javascript" language="javascript">
+    /**
+     * Very dirty fix to remove the page being edited from parent options
+     * This should be handled in the query builder of the form type.
+     */
+    // TODO: Update the QB in the form type to exclude the page being edited
+    $(document).ready(function(){
+        $("#silverkix_cmsbundle_pagetype_parent option[value='{{entity.id}}']").remove();
+    });
+</script>
 {% endblock %}
