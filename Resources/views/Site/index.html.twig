@@ -3,7 +3,10 @@
 <html lang="en-US">
 <head>
 <meta charset="UTF-8">
-<title>Serendipity</title>
+<title>{% block headtitle %}{% endblock %}</title>
+<meta name="description" content="{% block description %}{% endblock %}" />
+<meta name="keywords" content="{% block keywords %}{% endblock %}" />
+
 <link rel="shortcut icon" href="{{ asset(public) }}images/favicon.png"/>
 <link rel="stylesheet" type="text/css" href="{{ asset(public) }}style.css" media="all" />
 <link rel="stylesheet" type="text/css" href="{{ asset(public) }}css/view.css" media="all" />
