@@ -31,32 +31,162 @@
     <!-- MAIN CONTENT -->
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
-        <h3>Welcome to GitHub Pages.</h3>
+        <h1>Welcome to the Silverkix CMSBundle for Symfony</h1>
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
+<p>This bundle will help you kickstart any project requiring a simple CMS. This will mainly be for smaller websites which will be managed by the client himself and not updated very often.</p>
 
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
+<p>This cms includes the following features:</p>
+
+<ul>
+<li>Pages (include Seo data)</li>
+<li>User management</li>
+</ul><h2>Installation</h2>
+
+<h3>1) Using composer</h3>
+
+<p>Add the bundle to your composer.json</p>
+
+<pre><code>"require": {
+    ....,
+    "silverkix/cms-bundle": "dev-master",
+    .....
+},
 </code></pre>
 
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
+<p>Run your composer update</p>
 
-<h3>Designer Templates</h3>
+<pre><code>$ php composer.phar update
+</code></pre>
 
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
+<h3>2) Paste to <code>security.yml</code>
+</h3>
 
-<h3>Rather Drive Stick?</h3>
+<pre><code>security:
+    encoders:
+        Silverkix\CMSBundle\Entity\User:
+            algorithm:        sha512
+            encode_as_base64: false
+            iterations:       1
 
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
+    role_hierarchy:
+        ROLE_ADMIN:       ROLE_ADMIN
+        ROLE_SUPER_ADMIN: [ ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH ]
 
-<h3>Authors and Contributors</h3>
+    providers:
+        administrators:
+            entity: { class: SilverkixCMSBundle:User, property: username }
 
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
+    firewalls:
+        admin_area:
+            pattern:    ^/
+            anonymous: ~
+            form_login:
+                login_path:  admin_login
+                check_path:  admin_login_check
+                default_target_path: admin_index
+                always_use_default_target_path: true
+            logout:
+                path: /logout
+                target: /
 
-<h3>Support or Contact</h3>
+    access_control:
+        - { path: ^/admin, roles: ROLE_ADMIN }
+</code></pre>
 
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
+<h3>3) Add routing</h3>
+
+<p>Add these two routes to your <code>app/config/routing.yml</code></p>
+
+<pre><code>## CMSBundle admin routing
+admin:
+    resource: "@SilverkixCMSBundle/Resources/config/routing/admin.yml"
+    prefix:   /admin
+
+## CMSBundle Site routing
+site:
+    resource: "@SilverkixCMSBundle/Resources/config/routing/site.yml"
+    prefix:   /
+</code></pre>
+
+<h3>4) Update database</h3>
+
+<p>Run <code>php app/console doctrine:schema:update</code> to update the database</p>
+
+<h3>5) Load fixtures</h3>
+
+<p>add the fixtures bundle to your kernel:</p>
+
+<pre><code>$bundles = array(
+    ....,
+    new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
+    ....,
+);
+</code></pre>
+
+<h3>6) Extend your bundle</h3>
+
+<p>In order to overwrite the frontend template you need to extend out bundle so you can overwrite any necessary stuffz.</p>
+
+<pre><code>&lt;?php
+// src/Acme/DemoBundle/AcmeDemoBundle.php
+
+namespace Acme\DemoBundle;
+
+use Symfony\Component\HttpKernel\Bundle\Bundle;
+
+class AcmeDemoBundle extends Bundle
+{
+    public function getParent()
+    {
+        return 'SilverkixCMSBundle';
+    }
+}
+</code></pre>
+
+<h3>7) Create public uploads folder</h3>
+
+<p><code>[PUBLIC_HTML]/uploads</code> (chmod 777)</p>
+
+<h3>8) Clear Cache / Install Assets</h3>
+
+<p>clear your cache and install your assets</p>
+
+<pre><code>$ php app/console cache:clear
+$ php app/console assets:install
+</code></pre>
+
+<h3>9) See your brand new website!</h3>
+
+<p>You can now see your website at <code>http://localhost/app_dev.php</code> (if that is the local url of your installation of course!)</p>
+
+<p>To open the admin panel you navigate to <code>/app_dev.php/admin</code>. Default admin user:</p>
+
+<pre><code>Username: admin
+Password: mypass
+</code></pre>
+
+<h2>Adding Your Frontend</h2>
+
+<p>In order to put your own frontend on the website you need to overwrite the one from this bundle.
+Since you extended the bundle in step #6, all you have to do is copy the template files you want to overwrite to your bundle.</p>
+
+<p>Generally you will only need to overwrite <code>index.html.twig</code>, but you can overwrite any template you want.</p>
+
+<pre><code>$ cp vendor/silverkix/cms-bundle/Silverkix/CMSBundle/Resources/views/Site/index.html.twig src/Acme/DemoBundle/Resources/views/Site
+</code></pre>
+
+<p>As you can see the front-end templates reside in <code>views/Site</code> while the admin templates reside in <code>views/Admin</code>.</p>
+
+<p>This is also the case for public files. See <code>public/admin/</code> for backend files and <code>public/site/</code> for frontend files.</p>
+
+<h2>Collaboration</h2>
+
+<p>Feel free to fork this repo and add / improve features.
+Any pull requests and / or issues are very welcome!</p>
+
+<h2>License</h2>
+
+<p><a href="http://creativecommons.org/licenses/by-sa/3.0/legalcode">Creative Commons Attribution-ShareAlike 3.0 Unported</a></p>
       </section>
     </div>
 
@@ -68,7 +198,17 @@ $ git checkout gh-pages
       </footer>
     </div>
 
-    
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-40442718-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
 
   </body>
 </html>
