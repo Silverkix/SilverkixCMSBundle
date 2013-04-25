@@ -1,26 +1,25 @@
 <!DOCTYPE html>
 <html>
 
-  <head>
+<head>
     <meta charset='utf-8' />
     <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="Silverkixcmsbundle : A simple standalone cms bundle to kickstart any project in need to simple admin functionality" />
+    <meta name="description" content="A simple standalone cms bundle to kickstart any project in need to simple admin functionality" />
 
     <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
 
-    <title>Silverkixcmsbundle</title>
-  </head>
+    <title>Silverkix CMS Bundle - A standalone Symfony CMS Bundle</title>
+</head>
 
-  <body>
+<body>
+    <a href="https://github.com/Silverkix/SilverkixCMSBundle"><img style="position: absolute; top: 0; right: 0; border: 0;padding:0;width:auto;box-shadow:none;margin:0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
 
     <!-- HEADER -->
     <div id="header_wrap" class="outer">
         <header class="inner">
-          <a id="forkme_banner" href="https://github.com/Silverkix/SilverkixCMSBundle">View on GitHub</a>
 
-          <h1 id="project_title">Silverkixcmsbundle</h1>
-          <h2 id="project_tagline">A simple standalone cms bundle to kickstart any project in need to simple admin functionality</h2>
-
+        <h1 id="project_title"><img src="images/logo.png"></h1>
+        <h2 id="project_tagline">A simple standalone cms bundle to kickstart any project in need to simple admin functionality</h2>
             <section id="downloads">
               <a class="zip_download_link" href="https://github.com/Silverkix/SilverkixCMSBundle/zipball/master">Download this project as a .zip file</a>
               <a class="tar_download_link" href="https://github.com/Silverkix/SilverkixCMSBundle/tarball/master">Download this project as a tar.gz file</a>
@@ -30,185 +29,178 @@
 
     <!-- MAIN CONTENT -->
     <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
+    <section id="main_content" class="inner">
         <h1>Welcome to the Silverkix CMSBundle for Symfony</h1>
 
-<p>This bundle will help you kickstart any project requiring a simple CMS. This will mainly be for smaller websites which will be managed by the client himself and not updated very often.</p>
+        <p>This bundle will help you kickstart any project requiring a simple CMS. This will mainly be for smaller websites which will be managed by the client himself and not updated very often.</p>
 
-<p>This cms includes the following features:</p>
+        <p>This cms includes the following features:</p>
 
-<ul>
-<li>Pages (include Seo data)</li>
-<li>User management</li>
-</ul><h2>Installation</h2>
+        <ul>
+        <li>Pages (include Seo data)</li>
+        <li>User management</li>
+        </ul><h2>Installation</h2>
 
-<h3>1) Using composer</h3>
+        <h3>1) Using composer</h3>
 
-<p>Add the bundle to your composer.json</p>
+        <p>Add the bundle to your composer.json</p>
 
-<pre><code>"require": {
-    ....,
-    "silverkix/cms-bundle": "dev-master",
-    .....
-},
-</code></pre>
+        <pre><code>"require": {
+            ....,
+            "silverkix/cms-bundle": "dev-master",
+            .....
+        },
+        </code></pre>
 
-<p>Run your composer update</p>
+        <p>Run your composer update</p>
 
-<pre><code>$ php composer.phar update
-</code></pre>
+        <pre><code>$ php composer.phar update
+        </code></pre>
 
-<h3>2) Paste to <code>security.yml</code>
-</h3>
+        <h3>2) Paste to <code>security.yml</code>
+        </h3>
 
-<pre><code>security:
-    encoders:
-        Silverkix\CMSBundle\Entity\User:
-            algorithm:        sha512
-            encode_as_base64: false
-            iterations:       1
+        <pre><code>security:
+            encoders:
+                Silverkix\CMSBundle\Entity\User:
+                    algorithm:        sha512
+                    encode_as_base64: false
+                    iterations:       1
 
-    role_hierarchy:
-        ROLE_ADMIN:       ROLE_ADMIN
-        ROLE_SUPER_ADMIN: [ ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH ]
+            role_hierarchy:
+                ROLE_ADMIN:       ROLE_ADMIN
+                ROLE_SUPER_ADMIN: [ ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH ]
 
-    providers:
-        administrators:
-            entity: { class: SilverkixCMSBundle:User, property: username }
+            providers:
+                administrators:
+                    entity: { class: SilverkixCMSBundle:User, property: username }
 
-    firewalls:
-        admin_area:
-            pattern:    ^/
-            anonymous: ~
-            form_login:
-                login_path:  admin_login
-                check_path:  admin_login_check
-                default_target_path: admin_index
-                always_use_default_target_path: true
-            logout:
-                path: /logout
-                target: /
+            firewalls:
+                admin_area:
+                    pattern:    ^/
+                    anonymous: ~
+                    form_login:
+                        login_path:  admin_login
+                        check_path:  admin_login_check
+                        default_target_path: admin_index
+                        always_use_default_target_path: true
+                    logout:
+                        path: /logout
+                        target: /
 
-    access_control:
-        - { path: ^/admin, roles: ROLE_ADMIN }
-</code></pre>
+            access_control:
+                - { path: ^/admin, roles: ROLE_ADMIN }
+        </code></pre>
 
-<h3>3) Add routing</h3>
+        <h3>3) Add routing</h3>
 
-<p>Add these two routes to your <code>app/config/routing.yml</code></p>
+        <p>Add these two routes to your <code>app/config/routing.yml</code></p>
 
-<pre><code>## CMSBundle admin routing
-admin:
-    resource: "@SilverkixCMSBundle/Resources/config/routing/admin.yml"
-    prefix:   /admin
+        <pre><code>## CMSBundle admin routing
+        admin:
+            resource: "@SilverkixCMSBundle/Resources/config/routing/admin.yml"
+            prefix:   /admin
 
-## CMSBundle Site routing
-site:
-    resource: "@SilverkixCMSBundle/Resources/config/routing/site.yml"
-    prefix:   /
-</code></pre>
+        ## CMSBundle Site routing
+        site:
+            resource: "@SilverkixCMSBundle/Resources/config/routing/site.yml"
+            prefix:   /
+        </code></pre>
 
-<h3>4) Update database</h3>
+        <h3>4) Update database</h3>
 
-<p>Run <code>php app/console doctrine:schema:update</code> to update the database</p>
+        <p>Run <code>php app/console doctrine:schema:update</code> to update the database</p>
 
-<h3>5) Load fixtures</h3>
+        <h3>5) Load fixtures</h3>
 
-<p>add the fixtures bundle to your kernel:</p>
+        <p>add the fixtures bundle to your kernel:</p>
 
-<pre><code>$bundles = array(
-    ....,
-    new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
-    ....,
-);
-</code></pre>
+        <pre><code>$bundles = array(
+            ....,
+            new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
+            ....,
+        );
+        </code></pre>
 
-<h3>6) Extend your bundle</h3>
+        <h3>6) Extend your bundle</h3>
 
-<p>In order to overwrite the frontend template you need to extend out bundle so you can overwrite any necessary stuffz.</p>
+        <p>In order to overwrite the frontend template you need to extend out bundle so you can overwrite any necessary stuffz.</p>
 
-<pre><code>&lt;?php
-// src/Acme/DemoBundle/AcmeDemoBundle.php
+        <pre><code>&lt;?php
+        // src/Acme/DemoBundle/AcmeDemoBundle.php
 
-namespace Acme\DemoBundle;
+        namespace Acme\DemoBundle;
 
-use Symfony\Component\HttpKernel\Bundle\Bundle;
+        use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class AcmeDemoBundle extends Bundle
-{
-    public function getParent()
-    {
-        return 'SilverkixCMSBundle';
-    }
-}
-</code></pre>
+        class AcmeDemoBundle extends Bundle
+        {
+            public function getParent()
+            {
+                return 'SilverkixCMSBundle';
+            }
+        }
+        </code></pre>
 
-<h3>7) Create public uploads folder</h3>
+        <h3>7) Create public uploads folder</h3>
 
-<p><code>[PUBLIC_HTML]/uploads</code> (chmod 777)</p>
+        <p><code>[PUBLIC_HTML]/uploads</code> (chmod 777)</p>
 
-<h3>8) Clear Cache / Install Assets</h3>
+        <h3>8) Clear Cache / Install Assets</h3>
 
-<p>clear your cache and install your assets</p>
+        <p>clear your cache and install your assets</p>
 
-<pre><code>$ php app/console cache:clear
-$ php app/console assets:install
-</code></pre>
+        <pre><code>$ php app/console cache:clear<br/>$ php app/console assets:install</code></pre>
 
-<h3>9) See your brand new website!</h3>
+        <h3>9) See your brand new website!</h3>
 
-<p>You can now see your website at <code>http://localhost/app_dev.php</code> (if that is the local url of your installation of course!)</p>
+        <p>You can now see your website at <code>http://localhost/app_dev.php</code> (if that is the local url of your installation of course!)</p>
 
-<p>To open the admin panel you navigate to <code>/app_dev.php/admin</code>. Default admin user:</p>
+        <p>To open the admin panel you navigate to <code>/app_dev.php/admin</code>. Default admin user:</p>
 
-<pre><code>Username: admin
-Password: mypass
-</code></pre>
+        <pre><code>Username: admin<br/>Password: mypass</code></pre>
 
-<h2>Adding Your Frontend</h2>
+        <h2>Adding Your Frontend</h2>
 
-<p>In order to put your own frontend on the website you need to overwrite the one from this bundle.
-Since you extended the bundle in step #6, all you have to do is copy the template files you want to overwrite to your bundle.</p>
+        <p>In order to put your own frontend on the website you need to overwrite the one from this bundle.
+        Since you extended the bundle in step #6, all you have to do is copy the template files you want to overwrite to your bundle.</p>
 
-<p>Generally you will only need to overwrite <code>index.html.twig</code>, but you can overwrite any template you want.</p>
+        <p>Generally you will only need to overwrite <code>index.html.twig</code>, but you can overwrite any template you want.</p>
 
-<pre><code>$ cp vendor/silverkix/cms-bundle/Silverkix/CMSBundle/Resources/views/Site/index.html.twig src/Acme/DemoBundle/Resources/views/Site
-</code></pre>
+        <pre><code>$ cp vendor/silverkix/cms-bundle/Silverkix/CMSBundle/Resources/views/Site/index.html.twig src/Acme/DemoBundle/Resources/views/Site
+        </code></pre>
 
-<p>As you can see the front-end templates reside in <code>views/Site</code> while the admin templates reside in <code>views/Admin</code>.</p>
+        <p>As you can see the front-end templates reside in <code>views/Site</code> while the admin templates reside in <code>views/Admin</code>.</p>
 
-<p>This is also the case for public files. See <code>public/admin/</code> for backend files and <code>public/site/</code> for frontend files.</p>
+        <p>This is also the case for public files. See <code>public/admin/</code> for backend files and <code>public/site/</code> for frontend files.</p>
 
-<h2>Collaboration</h2>
+        <h2>Collaboration</h2>
 
-<p>Feel free to fork this repo and add / improve features.
-Any pull requests and / or issues are very welcome!</p>
+        <p>Feel free to fork this repo and add / improve features.
+        Any pull requests and / or issues are very welcome!</p>
 
-<h2>License</h2>
+        <h2>License</h2>
 
-<p><a href="http://creativecommons.org/licenses/by-sa/3.0/legalcode">Creative Commons Attribution-ShareAlike 3.0 Unported</a></p>
-      </section>
+        <p><a href="http://creativecommons.org/licenses/by-sa/3.0/legalcode">Creative Commons Attribution-ShareAlike 3.0 Unported</a></p>
+    </section>
     </div>
 
     <!-- FOOTER  -->
     <div id="footer_wrap" class="outer">
-      <footer class="inner">
+    <footer class="inner">
         <p class="copyright">Silverkixcmsbundle maintained by <a href="https://github.com/Silverkix">Silverkix</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
-      </footer>
+    </footer>
     </div>
 
-              <script type="text/javascript">
-            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-          </script>
-          <script type="text/javascript">
-            try {
-              var pageTracker = _gat._getTracker("UA-40442718-1");
-            pageTracker._trackPageview();
-            } catch(err) {}
-          </script>
-
-
-  </body>
+    <script type="text/javascript">
+        var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+        document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    <script type="text/javascript">
+        try {
+          var pageTracker = _gat._getTracker("UA-40442718-1");
+        pageTracker._trackPageview();
+        } catch(err) {}
+    </script>
+</body>
 </html>
