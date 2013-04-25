@@ -23,6 +23,13 @@ body {
 .success{ color: #009900;}
 .error { color:#990000;}
 
+a:hover,
+a:active,
+a:visited,
+a:link {
+	color: #5494af;
+}
+
 /* Logo  ---------------------------------------- */
 
 h1 {
@@ -207,6 +214,10 @@ p {
 
 #main table tr.children td {
 	border-bottom: 1px dashed #333
+}
+
+#main table tr.children.last td {
+	border-bottom: 2px solid #333;
 }
 
 #main table tr.odd td {

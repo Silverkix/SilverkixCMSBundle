@@ -41,7 +41,7 @@
             </tr>
             {% if entity.children|length > 0 %}
                 {% for child in entity.children %}
-                    <tr class="children">
+                    <tr class="children {% if loop.last %}last{% endif %}">
                         <td>{{ child.title }}</td>
                         <td>{{ child.keywords }}</td>
                         <td>{{ child.description }}</td>
