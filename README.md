@@ -1,13 +1,9 @@
-Current Release: 1.0.0-beta
-Wiki: (https://github.com/Silverkix/SilverkixCMSBundle/wiki)
-
 # Welcome to the Silverkix CMSBundle for Symfony
-This bundle will help you kickstart any project requiring a simple CMS. This will mainly be for smaller websites which will be managed by the client himself and not updated very often.
+Current Release: 1.0.0-beta
 
-This cms includes the following features:
+Wiki: [Github Wiki](https://github.com/Silverkix/SilverkixCMSBundle/wiki)
 
-* Pages (include Seo data)
-* User management
+More info: [Silverkix CMS Bundle](http://silverkix.github.io/SilverkixCMSBundle)
 
 ## Collaboration
 Feel free to fork this repo and add / improve features.
