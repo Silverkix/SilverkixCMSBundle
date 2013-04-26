@@ -18,7 +18,7 @@ admin_user_edit:
 admin_user_update:
     pattern:  /{id}/update
     defaults: { _controller: "SilverkixCMSBundle:AdminUser:update" }
-    requirements: { _method: post }
+    requirements: { _method: post|put }
 
 admin_user_delete:
     pattern:  /{id}/delete
