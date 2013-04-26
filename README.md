@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/Silverkix/SilverkixCMSBundle.png?branch=master)](https://travis-ci.org/Silverkix/SilverkixCMSBundle)
+[![Build Status](https://travis-ci.org/Silverkix/SilverkixCMSBundle.png?branch=1.0.0-beta)](https://travis-ci.org/Silverkix/SilverkixCMSBundle)
 
 # Welcome to the Silverkix CMSBundle for Symfony
 Current Release: 1.0.0-beta
