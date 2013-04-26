@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- http://www.phpunit.de/manual/current/en/appendixes.configuration.html -->
+<phpunit bootstrap="./vendor/autoload.php" >
+
+    <testsuites>
+        <testsuite name="SilverkixCMSBundle Test Suite">
+            <directory>./Tests/Functional</directory>
+        </testsuite>
+    </testsuites>
+
+    <php>
+        <server name="KERNEL_DIR" value="./Tests" />
+    </php>
+
+    <filter>
+        <!-- Ignore these for Code Coverage -->
+        <whitelist>
+            <directory>./</directory>
+            <exclude>
+                <directory>./Tests/</directory>
+                <directory>./Resources/</directory>
+                <directory>./DependencyInjection/</directory>
+                <directory>./vendor/</directory>
+            </exclude>
+        </whitelist>
+    </filter>
+
+</phpunit>
