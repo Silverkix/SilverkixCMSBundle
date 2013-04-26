@@ -1,7 +1,10 @@
 [![Build Status](https://travis-ci.org/Silverkix/SilverkixCMSBundle.png?branch=master)](https://travis-ci.org/Silverkix/SilverkixCMSBundle)
 
+(please note: this test only shows that the testing mechanism is in place! Propper tests still need to be written)
+
 # Welcome to the Silverkix CMSBundle for Symfony
-Current Release: 1.0.0-beta
+
+Current Release: [1.0.0-beta](https://github.com/Silverkix/SilverkixCMSBundle/tree/1.0.0-beta)
 
 Wiki: [Github Wiki](https://github.com/Silverkix/SilverkixCMSBundle/wiki)
 
