@@ -14,8 +14,8 @@
         }
     ],
     "require": {
-        "symfony/symfony": "2.2.*",
-        "symfony/framework-bundle": "2.2.*",
+        "symfony/symfony": "2.3.*",
+        "symfony/framework-bundle": "2.3.*",
         "doctrine/doctrine-fixtures-bundle": "2.2.0"
     },
     "minimum-stability": "dev",
