@@ -1,6 +1,6 @@
 {
     "name": "silverkix/cms-bundle",
-    "version": "0.0.1",
+    "version": "1.0.0-beta",
     "description": "Simple cms bundle for Symfony 2.2",
     "keywords": [],
     "type": "symfony-bundle",
