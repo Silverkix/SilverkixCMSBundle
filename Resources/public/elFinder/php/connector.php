@@ -31,8 +31,8 @@ $opts = array(
 	'roots' => array(
 		array(
 			'driver'        => 'LocalFileSystem',   // driver for accessing file system (REQUIRED)
-			'path'          => '../../../../../../../../../web/uploads',         // path to files (REQUIRED)
-			'URL'           => '/uploads', // URL to files (REQUIRED)
+			'path'          => $_SERVER['DOCUMENT_ROOT'].'/web/uploads',         // path to files (REQUIRED)
+			'URL'           => '/web/uploads', // URL to files (REQUIRED)
 			'accessControl' => 'access'             // disable and hide dot starting files (OPTIONAL)
 		)
 	)
