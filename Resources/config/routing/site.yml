@@ -12,6 +12,6 @@ admin_logout:
 ## Public website paths
 home:
     pattern:  /{slug}
-    defaults: { _controller: SilverkixCMSBundle:Site:index, slug: '' }
+    defaults: { _controller: SilverkixCMSBundle:Default:index, slug: '' }
     requirements:
         slug: ".+"

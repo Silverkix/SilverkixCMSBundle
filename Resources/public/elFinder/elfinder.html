@@ -33,7 +33,7 @@
 		        var funcNum = getUrlParam('CKEditorFuncNum');
 
 		        var elf = $('#elfinder').elfinder({
-		            url : '/bundles/silverkixcms/elFinder/php/connector.php',
+		            url : '/web/bundles/silverkixcms/elFinder/php/connector.php',
 		            getFileCallback : function(file) {
 		                window.opener.CKEDITOR.tools.callFunction(funcNum, file);
 		                window.close();
